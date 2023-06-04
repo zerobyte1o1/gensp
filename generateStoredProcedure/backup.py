@@ -5,8 +5,6 @@ import yaml
 
 
 # 数据库连接字符串
-
-
 def conn_postgres(database):
     rootPath = os.path.dirname(os.path.abspath(__file__))
     configPath = os.path.join(rootPath, "env.yaml")
@@ -44,6 +42,8 @@ def get_backup(database):
     # with open(backup_file_name, 'w') as backup_file:
     #     for table in table_names:
     #         cur.copy_to(backup_file, table[0], sep='|')
+
+    # 需要修改成提张表存入一个文件下，从而降低时间复杂度。
     with open(backup_file_name, 'w') as backup_file:
         for table in table_names:
             cur.execute(f"COPY {table[0]} TO STDOUT WITH DELIMITER '|' CSV HEADER")
