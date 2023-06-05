@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 import yaml
-from backup import conn_postgres
+# import os
+from .backup import conn_postgres
 
 
 def login():

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import time
 import psycopg2
 import os
@@ -6,9 +8,7 @@ import yaml
 
 # 数据库连接字符串
 def conn_postgres(database):
-    rootPath = os.path.dirname(os.path.abspath(__file__))
-    configPath = os.path.join(rootPath, "env.yaml")
-    env = yaml.safe_load(open(configPath))
+    env = yaml.safe_load(open("env.yaml"))
     try:
         conn = psycopg2.connect(
             host=env["login"]["host"],

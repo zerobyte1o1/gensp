@@ -1,11 +1,27 @@
+# -*- coding: utf-8 -*-
+
 import sys
-from login import login
-from backup import get_backup
-from compare import run_compare
+
+import yaml
+
+from .login import login
+from .backup import get_backup
+from .compare import run_compare
 import os
 
 
 def main():
+    if not os.path.exists('env.yaml'):
+        env = {
+            'login': {
+                'host': 'localhost',
+                'port': 3306,
+                'username': 'root',
+                'password': 'password'
+            }
+        }
+        with open('env.yaml', 'w') as f:
+            yaml.dump(env, f, default_flow_style=False)
     if len(sys.argv) == 2:
         if sys.argv[1] == 'login':
             login()
@@ -16,7 +32,7 @@ def main():
                     file_number += 1
             print('\033[32m·\033[0m已存在备份数量: ' + str(file_number))
             if file_number >= 2:
-                print('\033[33m·\033[0m备份数量已满，请执行gsp compare生成存储过程，或执行gsp clear清空备份')
+                print('\033[33m·\033[0m备份数量已满，请执行gensp compare生成存储过程，或执行gensp clear清空备份')
                 sys.exit()
             database_name = input('\033[34m·\033[0mdatabase: ').strip()
             print('\033[32m·\033[0m备份中……')
