@@ -1,6 +1,6 @@
- 
 import yaml
 from backup import conn_postgres
+
 
 def login():
     with open('env.yaml', 'r') as f:
@@ -11,7 +11,7 @@ def login():
     password = input('\033[34m·\033[0mpassword: ').strip()
     env['login']['host'] = host
     env['login']['port'] = port
-    env['login']['username'] = username
+    env['login']['user'] = username
     env['login']['password'] = password
     with open('env.yaml', 'w') as f:
         yaml.dump(env, f)
@@ -19,5 +19,4 @@ def login():
 
 
 if __name__ == '__main__':
-
     login()

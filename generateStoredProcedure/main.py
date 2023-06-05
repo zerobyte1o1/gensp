@@ -49,6 +49,5 @@ def main():
         print("\033[31m·\033Invalid number of arguments")
 
 
-
 if __name__ == '__main__':
     main()
